@@ -59,4 +59,14 @@ class User extends Authenticatable implements FilamentUser
     {
         return $panel->getId() === 'admin';
     }
+
+    public function sales(): HasMany
+    {
+        return $this->hasMany(Sale::class, 'created_by');
+    }
+
+    public function inventoryMovements(): HasMany
+    {
+        return $this->hasMany(InventoryMovement::class);
+    }
 }

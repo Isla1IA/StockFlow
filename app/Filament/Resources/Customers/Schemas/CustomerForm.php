@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Customers\Schemas;
 
-use Dom\Text;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
