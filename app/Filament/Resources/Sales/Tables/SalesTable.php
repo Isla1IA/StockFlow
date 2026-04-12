@@ -92,7 +92,8 @@ class SalesTable
                             reason: $data['cancellation_reason'] ?? null,
                         );
                     })
-                    ->successNotificationTitle('Venta Cancelada Correctamente'),
+                    ->successNotificationTitle('Venta Cancelada Correctamente')
+                    ->authorize(fn(Sale $record): bool => auth()->user()?->can('cancel', $record) ?? false),
 
                 ViewAction::make()
             ])

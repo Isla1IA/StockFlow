@@ -49,6 +49,7 @@ class ViewSale extends ViewRecord
 
                     $this->record->refresh();
                 })
+                ->authorize(fn(): bool => auth()->user()?->can('cancel', $this->record) ?? false)
                 ->successNotificationTitle('Venta Cancelada Correctamente'),
         ];
     }
