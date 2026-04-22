@@ -13,6 +13,8 @@ class InventoryMovement extends Model
 
     public const REASON_SALE = 'sale';
     public const REASON_CANCEL_SALE = 'cancel_sale';
+    public const REASON_MANUAL_ENTRY = 'manual_entry';
+    public const REASON_MANUAL_ADJUSTMENT = 'manual_adjustment';
 
     protected $fillable = [
         'product_id',
