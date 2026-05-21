@@ -25,8 +25,10 @@ class ProcessLowStockAlertsJob implements ShouldQueue
             return;
         }
 
+        $permission = (string) config('stockflow.low_stock_alerts.recipients_permission', 'products.view');
+
         $recipients = User::query()
-            ->permission('products.view')
+            ->permission($permission)
             ->get();
 
         if ($recipients->isEmpty()) {

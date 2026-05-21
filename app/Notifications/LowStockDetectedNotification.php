@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Models\LowStockAlert;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class LowStockDetectedNotification extends Notification
@@ -16,7 +17,33 @@ class LowStockDetectedNotification extends Notification
 
     public function via(object $notifiable): array
     {
-        return ['database'];
+        $channels = ['database'];
+
+        $mailEnabled = (bool) config('stockflow.low_stock_alerts.mail_enabled', false);
+        $hasEmail = filled($notifiable->email ?? null);
+
+        if ($mailEnabled && $hasEmail) {
+            $channels[] = 'mail';
+        }
+
+        return $channels;
+    }
+
+    public function toMail(object $notifiable): MailMessage
+    {
+        $product = $this->alert->product;
+        $prefix = (string) config('stockflow.low_stock_alerts.mail_subject_prefix', '[StockFlow]');
+
+        return (new MailMessage)
+            ->subject("{$prefix} Alerta de Stock Bajo")
+            ->greeting("Hola {$notifiable->name}, ")
+            ->line('Se detectó un producto por debajo del stock mínimo.')
+            ->line('Producto: ' . ($product?->name ?? 'N/A'))
+            ->line('SKU: ' . ($product?->sku ?? 'N/A'))
+            ->line('Stock actual: ' . $this->alert->stock)
+            ->line('Stock mínimo: ' . $this->alert->min_stock)
+            ->line('Fecha dde detección: ' . optional($this->alert->last_detected_at)->format('Y-m-d H:i:s'))
+            ->line('Por favor, revisa el inventario lo antes posible.');
     }
 
     public function toArray(object $notifiable): array
