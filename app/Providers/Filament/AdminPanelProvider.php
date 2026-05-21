@@ -28,6 +28,11 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->registration()
+            ->brandName('StockFlow')
+            ->brandLogo(asset('images/StockFlow_Logo.png'))
+            ->darkModeBrandLogo(asset('images/StockFlow_Logo.png'))
+            ->brandLogoHeight('2.5rem')
+            ->favicon(asset('images/StockFlow_favicon.png'))
             ->colors([
                 'primary' => Color::Amber,
             ])
