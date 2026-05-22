@@ -83,7 +83,7 @@ class SalesTable
 
                         if (! $userId) {
                             throw ValidationException::withMessages([
-                                'user' => 'Authenticated user is required.',
+                                'user' => 'Usuario autenticado es requerido.',
                             ]);
                         }
                         app(SaleService::class)->canceledSale(

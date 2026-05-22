@@ -3,7 +3,7 @@
 ![Logo de StockFlow](public/images/StockFlow_Logo.png)
 Sistema Web para la gestión de inventario y ventas con panel administrativo y API REST
 autenticada por tokens.
-StokFlow centraliza catálogo de productos, clientes, ventas, movimientos de inventario y
+StockFlow centraliza catálogo de productos, clientes, ventas, movimientos de inventario y
 alertas de stock bajo.
 
 ---
@@ -20,7 +20,7 @@ Incluye:
 - Control de acceso por roles y permisos.
 - Registro de movimientos de inventario.
 - Flujo de ventas con validación de stock y cancelación.
-- Alertas de bajo inventario (notificación en bbase de datos y correo opcional).
+- Alertas de bajo inventario (notificación en base de datos y correo opcional).
 
 ---
 
@@ -31,7 +31,7 @@ Incluye:
 - **Autenticación API:** Laravel Sanctum
 - **Roles y permisos:** Spatie Laravel Permission
 - **Base de datos:** MySQL (Recomendado)
-- **Fronten build:** Vite 6, Tailwind, CSS 3, Axios, PostCSS
+- **Frontend build:** Vite 6, Tailwind, CSS 3, Axios, PostCSS
 - **Colas / jobs:** Queue driver `database`
   -- **Testing:** PHPUnit 11
 
@@ -42,7 +42,7 @@ Incluye:
 1. **Categorías**
     - CRUD de categorías activas/inactivas.
 
-2. **Prodctos**
+2. **Productos**
     - CRUD de productos con SKU único.
     - Control de `stock`, `min_stock` y precio.
     - Entradas manuales y ajustes manuales de inventario.
@@ -70,7 +70,7 @@ Incluye:
 7. **Seguridad y acceso**
     - Roles: `admin`, `seller`, `warehouse`.
     - Permisos granulares por módulo.
-    - Accesp a panle condicionado por permiso `panel.access`.
+    - Acceso a panel condicionado por permiso `panel.access`.
 
 ---
 
@@ -108,9 +108,9 @@ Configura conexión a BD en .env y crea la base de datos (ejemplo: stockflow)
 php artisan migrate --seed
 ```
 
-### 5) Levantar entrono de desarrollo
+### 5) Levantar entorno de desarrollo
 
-Opción recomendad (todo junto):
+Opción recomendado (todo junto):
 
 ```bash
 composer run dev
@@ -200,29 +200,29 @@ php artisan db:seed --class="Database\\Seeders\\DemoDataSeeder"
 
 ### Login y registro
 
-![alt text](image.png)
-![alt text](image-1.png)
+![Login de StockFlow](docs/screenshots/login.png)
+![Registro de StockFlow](docs/screenshots/register.png)
 
 ### Dashboard Principal
 
-![alt text](image-4.png)
-![alt text](image-5.png)
+![Dashboard principal](docs/screenshots/dashboard.png)
+![Dasboard principal](docs/screenshots/dashboard2.png)
 
 ### Listado de productos
 
-![alt text](image-6.png)
+![Listado de Productos](docs/screenshots/productos.png)
 
 ### Entrada de Producto
 
-![alt text](image-7.png)
+![Entrada de Productos](docs/screenshots/create-producto.png)
 
 ### Ventas
 
-![alt text](image-8.png)
+![Listado de Ventas](docs/screenshots/ventas.png)
 
 ### Creacion de venta
 
-![alt text](image-9.png)
+![Creacion de Ventas](docs/screenshots/create-venta.png)
 
 ---
 
@@ -253,7 +253,7 @@ StockFlow/
 
 ---
 
-## Flujo de general (Alto Nivel)
+## Flujo general (Alto Nivel)
 
 ```mermaid
 flowchart LR

@@ -20,7 +20,7 @@ class CreateSale extends CreateRecord
 
         if (! $userId) {
             throw ValidationException::withMessages([
-                'user' => 'Authenticated user is required.',
+                'user' => 'Se requiere un usuario autenticado.',
             ]);
         }
 

@@ -48,7 +48,7 @@ class SaleService
                 ->first();
             if (! $customer) {
                 throw ValidationException::withMessages([
-                    'customer_id' => 'The selected customer is invalid or inactive.',
+                    'customer_id' => 'El cliente seleccionado no existe o está inactivo.',
                 ]);
             }
 
@@ -64,7 +64,7 @@ class SaleService
 
             if ($products->count() !== count($productsIds)) {
                 throw ValidationException::withMessages([
-                    'items' => 'One or more products do not exist.',
+                    'items' => 'Uno o más productos en los artículos no existen.',
                 ]);
             }
 
@@ -73,13 +73,13 @@ class SaleService
 
                 if (! $product->is_active) {
                     throw ValidationException::withMessages([
-                        'items' => "Product {$product->name} is inactive.",
+                        'items' => "El producto {$product->name} está inactivo.",
                     ]);
                 }
 
                 if ($requestedQuantity > (int) $product->stock) {
                     throw ValidationException::withMessages([
-                        'items' => "Insufficient stock for product {$product->name}. Available: {$product->stock}, requested: {$requestedQuantity}.",
+                        'items' => "Stock insuficiente para el producto {$product->name}. Disponible: {$product->stock}, solicitado: {$requestedQuantity}.",
                     ]);
                 }
             }
@@ -114,7 +114,7 @@ class SaleService
 
                 if ($lineDiscount > $lineSubtotal) {
                     throw ValidationException::withMessages([
-                        'items' => "Discount cannot exceed subtotal for product {$product->name}.",
+                        'items' => "El descuento no puede exceder el subtotal para el producto {$product->name}.",
                     ]);
                 }
 
@@ -232,7 +232,7 @@ class SaleService
 
             if ($sale->status === Sale::STATUS_CANCELLED) {
                 throw ValidationException::withMessages([
-                    'sale' => 'The sale is already cancelled.',
+                    'sale' => 'La venta ya está cancelada.',
                 ]);
             }
 
@@ -243,7 +243,7 @@ class SaleService
 
             if (empty($groupedQuantities)) {
                 throw ValidationException::withMessages([
-                    'sale' => 'The sale has no items to cancel.',
+                    'sale' => 'La venta no tiene artículos para cancelar.',
                 ]);
             }
 
@@ -257,7 +257,7 @@ class SaleService
 
             if ($products->count() !== count($productIds)) {
                 throw ValidationException::withMessages([
-                    'sale' => 'One or more products in the sale not charged exist.',
+                    'sale' => 'Uno o más productos en la venta no existen.',
                 ]);
             }
 
