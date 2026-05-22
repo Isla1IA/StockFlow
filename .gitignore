@@ -21,3 +21,8 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+# Demo seeders (local-only)
+/database/seeders/ProductCatalogSeeder.php
+/database/seeders/SalesCasesSeeder.php
+/database/seeders/DemoDataSeeder.php

@@ -1,66 +1,265 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Stock Flow
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Logo de StockFlow](public/images/StockFlow_Logo.png)
+Sistema Web para la gestión de inventario y ventas con panel administrativo y API REST
+autenticada por tokens.
+StokFlow centraliza catálogo de productos, clientes, ventas, movimientos de inventario y
+alertas de stock bajo.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Descripción del proyecto
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**StockFlow** está diseñado para negocios que necesitan controlar existencias, registrar
+ventas con trazabilidad y visualizar métricas operativas en tiempo real.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Incluye:
 
-## Learning Laravel
+- Panel administrativo `/admin` (Filament).
+- API REST en `/api` para integraciones y clientes externos.
+- Control de acceso por roles y permisos.
+- Registro de movimientos de inventario.
+- Flujo de ventas con validación de stock y cancelación.
+- Alertas de bajo inventario (notificación en bbase de datos y correo opcional).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Stack tecnológico
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Backend:** PHP 8.2, Laravel 11
+- **Panel admin:** Filament 5
+- **Autenticación API:** Laravel Sanctum
+- **Roles y permisos:** Spatie Laravel Permission
+- **Base de datos:** MySQL (Recomendado)
+- **Fronten build:** Vite 6, Tailwind, CSS 3, Axios, PostCSS
+- **Colas / jobs:** Queue driver `database`
+  -- **Testing:** PHPUnit 11
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Módulos Principales
 
-### Premium Partners
+1. **Categorías**
+    - CRUD de categorías activas/inactivas.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+2. **Prodctos**
+    - CRUD de productos con SKU único.
+    - Control de `stock`, `min_stock` y precio.
+    - Entradas manuales y ajustes manuales de inventario.
 
-## Contributing
+3. **Clientes**
+    - CRUD de clientes con código único.
+    - Datos fiscales y límite de crédito.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. **Ventas**
+    - Registro de ventas con detalle por producto.
+    - Validación de stock disponible.
+    - Cálculo de subtotal, descuentos, impuestos y total.
+    - Cancelación de ventas con reversa de inventario.
 
-## Code of Conduct
+5. **Movimientos de inventario**
+    - Historial de entradas/salidas/ajustes con trazabilidad.
+    - Referencia polimórfica al origen del movimiento (ej. venta).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+6. **Dashboard y resúmenes**
+    - Ventas del día/mes.
+    - Ingreso mensual.
+    - Productos con bajo stock.
+    - Top productos más vendidos.
 
-## Security Vulnerabilities
+7. **Seguridad y acceso**
+    - Roles: `admin`, `seller`, `warehouse`.
+    - Permisos granulares por módulo.
+    - Accesp a panle condicionado por permiso `panel.access`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## Instalación local
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 1) Requisitos
+
+- PHP `>= 8.2`
+- Composer
+- Node.js `>=18` (recomendado 20+)
+- npm
+- MySQL 8+ (o compatible)
+
+### 2) Clonar e instalar dependencias
+
+```bash
+git clone https://github.com/Isla1IA/StockFlow
+cd StockFlow
+composer install
+npm install
+```
+
+### 3) Configurar entorno
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Configura conexión a BD en .env y crea la base de datos (ejemplo: stockflow)
+
+### 4) Migrar y seeders
+
+```bash
+php artisan migrate --seed
+```
+
+### 5) Levantar entrono de desarrollo
+
+Opción recomendad (todo junto):
+
+```bash
+composer run dev
+```
+
+Esto inicia servidor Laravel, worker de colas, logs y Vite.
+
+Opción Manual (por separado)
+
+```bash
+php artisan serve
+php artisan queue:work
+npm run dev
+```
+
+---
+
+## Variables de entorno principales
+
+Basadas en **.env.example** y configuración de config/stockflow.php.
+
+| Variable                              | Propósito                            | Ejemplo           |
+| ------------------------------------- | ------------------------------------ | ----------------- |
+| APP_NAME                              | Nombre de la app                     | StockFlow         |
+| APP_ENV                               | Entorno de ejecución                 | local             |
+| APP_KEY                               | Clave de cifrado de Laravel          | base64:...        |
+| APP_URL                               | URL base local                       | http://localhost  |
+| DB_CONNECTION                         | Driver de base de datos              | mysql             |
+| DB_HOST                               | Host de BD                           | 127.0.0.1         |
+| DB_PORT                               | Puerto de BD                         | 3306              |
+| DB_DATABASE                           | Nombre de BD                         | stockflow         |
+| DB_USERNAME                           | Usuario de BD                        | root              |
+| DB_PASSWORD                           | Password de BD                       | ``                |
+| SESSION_DRIVER                        | Driver de sesión                     | database          |
+| CACHE_STORE                           | Driver de caché                      | database          |
+| QUEUE_CONNECTION                      | Driver de colas                      | database          |
+| MAIL_MAILER                           | Canal de correo                      | log / smtp        |
+| MAIL_HOST                             | Host SMTP                            | 127.0.0.1         |
+| MAIL_PORT                             | Puerto SMTP                          | 2525              |
+| MAIL_USERNAME                         | Usuario SMTP                         | null              |
+| MAIL_PASSWORD                         | Password SMTP                        | null              |
+| MAIL_FROM_ADDRESS                     | Remitente                            | hello@example.com |
+| LOW_STOCK_ALERT_MAIL_ENABLED          | Activa correo en alertas de stock    | true              |
+| LOW_STOCK_ALERT_MAIL_SUBJECT_PREFIX   | Prefijo de asunto de alerta          | [StockFlow]       |
+| LOW_STOCK_ALERT_RECIPIENTS_PERMISSION | Permiso para destinatarios de alerta | products.view     |
+
+---
+
+## Credenciales de prueba (Si conviene)
+
+Por seguridad, no se incluyen credenciales en el repositorio.
+
+Opciones para entorno local:
+
+1. Registrar usuario desde **/admin/register**
+2. Asignar rol admin manualmente:
+
+```bash
+php artisan tinker --execute="App\Models\User::where('email','tu-correo@dominio.com')->first()?->assignRole('admin');"
+```
+
+**NOTA:** el seeder asigna **admin** al primer usuario existente al momento de ejecutar seeders
+
+## Datos demo para pruebas (opcional)
+
+Además del seeding base, este proyecto incluye un seeder opcional con datos de demostración para QA y pruebas funcionales:
+
+- Catálogo de productos con distintos escenarios (stock saludable, stock bajo, agotado, inactivo, etc.).
+- Ventas en distintos estados (confirmada simple, confirmada con impuestos/descuentos, cancelada y borrador).
+- Usuarios/roles demo y clientes demo.
+
+### Ejecutar solo seeders base
+
+```bash
+php artisan db:seed
+```
+
+### Ejecutar datos demo (opcional)
+
+```bash
+php artisan db:seed --class="Database\\Seeders\\DemoDataSeeder"
+```
+
+---
+
+## Capturas
+
+### Login y registro
+
+![alt text](image.png)
+![alt text](image-1.png)
+
+### Dashboard Principal
+
+![alt text](image-4.png)
+![alt text](image-5.png)
+
+### Listado de productos
+
+![alt text](image-6.png)
+
+### Entrada de Producto
+
+![alt text](image-7.png)
+
+### Ventas
+
+![alt text](image-8.png)
+
+### Creacion de venta
+
+![alt text](image-9.png)
+
+---
+
+## Estructura general del sistema
+
+```text
+StockFlow/
+├── app/
+│   ├── Filament/
+│   ├── Http/
+│   │   ├── Controllers/Api/
+│   │   ├── Requests/Api/
+│   │   └── Resources/Api/
+│   ├── Jobs/
+│   ├── Models/
+│   ├── Notifications/
+│   ├── Policies/
+│   └── Services/
+├── config/
+├── database/
+│   ├── migrations/
+│   └── seeders/
+├── public/
+├── resources/
+├── routes/
+└── tests/
+```
+
+---
+
+## Flujo de general (Alto Nivel)
+
+```mermaid
+flowchart LR
+    A[Usuario en Panel /admin] --> B[Servicios de Negocio]
+    C[Cliente API /api] --> B
+    B --> D[(Base de datos MySQL)]
+    B --> E[Cola de trabajos]
+    E --> F[Notificaciones]
+```
