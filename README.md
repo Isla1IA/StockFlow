@@ -263,3 +263,107 @@ flowchart LR
     B --> E[Cola de trabajos]
     E --> F[Notificaciones]
 ```
+
+---
+
+## Api
+
+### Autenticacion
+
+```bash
+http://127.0.0.1:8000/api/auth/login
+```
+
+![Autenticacion](docs/screenshots/api-login.png)
+
+### Yo
+
+```bash
+http://127.0.0.1:8000/api/auth/me
+```
+
+![Me](docs/screenshots/api-me.png)
+
+### Productos
+
+```bash
+http://127.0.0.1:8000/api/products
+```
+
+![Products](/docs/screenshots/api-products.png)
+![Busqueda por Query Params](/docs/screenshots/api-products-query.png)
+![Creacion de Producto](/docs/screenshots/api-products-create.png)
+![Busqueda por id](/docs/screenshots/api-products-id.png)
+![Actualizacion Producto](/docs/screenshots/api-products-update.png)
+![Eliminacion de Producto](/docs/screenshots/api-products-delete.png)
+
+### Clientes
+
+```bash
+http://127.0.0.1:8000/api/customers
+```
+
+![Busqueda de Customer](/docs/screenshots/api-customer.png)
+**Aqui tambien se puede hacer busqueda por Query Params**
+![Creacion de Customer](/docs/screenshots/api-customer-create.png)
+![Busqueda por id](docs/screenshots/api-customer-id.png)
+![Actualizacion Customer](docs/screenshots/api-customer-update.png)
+![Eliminacion de Customer](docs/screenshots/api-customer-delete.png)
+
+### Ventas
+
+```bash
+http://127.0.0.1:8000/api/sales
+```
+
+![Busqueda de Ventas](docs/screenshots/api-sales.png)
+**Aqui tambien se puede hacer busqueda por Query Params**
+![Creacion de Venta](docs/screenshots/api-sales-create.png)
+![Busqueda por id](docs/screenshots/api-sales-id.png)
+![Cancelar Venta](docs/screenshots/api-sales-cancel.png)
+
+### Movimientos
+
+```bash
+http://127.0.0.1:8000/api/inventory-movements
+```
+
+![Busqueda de Inventory Movements](docs/screenshots/api-inventory.png)
+**Aqui tambien se puede hacer busqueda por Query Params**
+![Busqueda por id](docs/screenshots/api-inventory-id.png)
+
+### Estadiscticas
+
+```bash
+http://127.0.0.1:8000/api/summary/sales/today
+```
+
+![Ventas del dia](docs/screenshots/api-salesday.png)
+
+```bash
+http://127.0.0.1:8000/api/summary/sales/month
+```
+
+![Ventas del mes](docs/screenshots/api-salesmonth.png)
+
+```bash
+http://127.0.0.1:8000/api/summary/products/low-stock
+```
+
+![Productos con stock bajo](docs/screenshots/api-productslow.png)
+
+```bash
+http://127.0.0.1:8000/api/summary/products/top-selling
+```
+
+![Productos top selling](docs/screenshots/api-topselling.png)
+
+```bash
+http://127.0.0.1:8000/api/summary/revenue/monthly
+```
+
+![Ganancias mensuales](docs/screenshots/api-revenue.png)
+
+### Logout
+
+![Cerrar Sesion](docs/screenshots/api-logut.png)
