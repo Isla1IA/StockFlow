@@ -290,11 +290,22 @@ http://127.0.0.1:8000/api/auth/me
 http://127.0.0.1:8000/api/products
 ```
 
+Productos
 ![Products](/docs/screenshots/api-products.png)
+
+Busqueda por Query Params
 ![Busqueda por Query Params](/docs/screenshots/api-products-query.png)
+
+Creacion del Producto
 ![Creacion de Producto](/docs/screenshots/api-products-create.png)
+
+Busqueda por id
 ![Busqueda por id](/docs/screenshots/api-products-id.png)
+
+Actualizacion de Producto
 ![Actualizacion Producto](/docs/screenshots/api-products-update.png)
+
+Eliminacion de Producto
 ![Eliminacion de Producto](/docs/screenshots/api-products-delete.png)
 
 ### Clientes
@@ -303,11 +314,20 @@ http://127.0.0.1:8000/api/products
 http://127.0.0.1:8000/api/customers
 ```
 
+Busqueda
 ![Busqueda de Customer](/docs/screenshots/api-customer.png)
 **Aqui tambien se puede hacer busqueda por Query Params**
+
+Creacion
 ![Creacion de Customer](/docs/screenshots/api-customer-create.png)
+
+Busqueda por Id
 ![Busqueda por id](docs/screenshots/api-customer-id.png)
+
+Actualizacion
 ![Actualizacion Customer](docs/screenshots/api-customer-update.png)
+
+Eliminacion
 ![Eliminacion de Customer](docs/screenshots/api-customer-delete.png)
 
 ### Ventas
@@ -316,10 +336,17 @@ http://127.0.0.1:8000/api/customers
 http://127.0.0.1:8000/api/sales
 ```
 
+Busqueda
 ![Busqueda de Ventas](docs/screenshots/api-sales.png)
 **Aqui tambien se puede hacer busqueda por Query Params**
+
+Creacion
 ![Creacion de Venta](docs/screenshots/api-sales-create.png)
+
+Busqueda
 ![Busqueda por id](docs/screenshots/api-sales-id.png)
+
+Cancelar Venta
 ![Cancelar Venta](docs/screenshots/api-sales-cancel.png)
 
 ### Movimientos
@@ -328,8 +355,11 @@ http://127.0.0.1:8000/api/sales
 http://127.0.0.1:8000/api/inventory-movements
 ```
 
+Busqueda de Movimientos de inventario
 ![Busqueda de Inventory Movements](docs/screenshots/api-inventory.png)
 **Aqui tambien se puede hacer busqueda por Query Params**
+
+Busqueda por Id
 ![Busqueda por id](docs/screenshots/api-inventory-id.png)
 
 ### Estadiscticas
@@ -338,30 +368,35 @@ http://127.0.0.1:8000/api/inventory-movements
 http://127.0.0.1:8000/api/summary/sales/today
 ```
 
+Ventas del dia
 ![Ventas del dia](docs/screenshots/api-salesday.png)
 
 ```bash
 http://127.0.0.1:8000/api/summary/sales/month
 ```
 
+Ventas del mes
 ![Ventas del mes](docs/screenshots/api-salesmonth.png)
 
 ```bash
 http://127.0.0.1:8000/api/summary/products/low-stock
 ```
 
+Productos con Stock Bajo
 ![Productos con stock bajo](docs/screenshots/api-productslow.png)
 
 ```bash
 http://127.0.0.1:8000/api/summary/products/top-selling
 ```
 
+Productos Top Selling
 ![Productos top selling](docs/screenshots/api-topselling.png)
 
 ```bash
 http://127.0.0.1:8000/api/summary/revenue/monthly
 ```
 
+Ganancias Mensuales
 ![Ganancias mensuales](docs/screenshots/api-revenue.png)
 
 ### Logout
